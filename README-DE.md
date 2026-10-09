@@ -1,4 +1,4 @@
-# Excel BC `(v1.0.2)`
+# Excel BC `(v1.1.0)`
 
 ## Verwendung
 

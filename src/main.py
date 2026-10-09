@@ -1,6 +1,7 @@
 import sys
 import tkinter as tk
 from tkinter import ttk
+import pathlib
 
 from frames.main import MainFrame
 
@@ -23,10 +24,19 @@ class App(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
 
-        self.title("Excel BC v1.0.2")
+        self.title("Excel BC v1.1.0")
         self.geometry("1000x740+100+100")
         self.resizable(True, True)
-        self.iconbitmap("icon.ico")
+
+        icon_path: pathlib.Path | None = None
+
+        if hasattr(sys, "_MEIPASS"):
+            icon_path = pathlib.Path(sys._MEIPASS) / "icon.ico"
+        else:
+            icon_path = pathlib.Path(__file__).parent / "icon.ico"
+
+        if icon_path.exists():
+            self.iconbitmap(icon_path)
 
         style = ttk.Style(self)
         
