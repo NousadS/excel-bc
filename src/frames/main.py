@@ -45,6 +45,7 @@ class MainFrame(ttk.Frame):
         super().__init__(container, padding=10)
 
         self.state: State | None = None
+        self.problems: list[str] = []
 
         self.columnconfigure(0, weight=1)
         self.rowconfigure(2, weight=1)
@@ -112,7 +113,7 @@ class MainFrame(ttk.Frame):
         self.state = state
 
         self.file_section.path_var.set(str(self.state.workbook))
-        self.operation_list.set_operations([])
+        self.operation_list.set_operations([], self.problems)
         self.info_section.common_folder_var.set(state.common_folder)
         self.info_section.initial_folder_var.set(state.initial_folder)
         self.file_section.reload_button.state(["!disabled"])
@@ -134,7 +135,6 @@ class MainFrame(ttk.Frame):
             return
 
         copied, problems = self.state.copy_files()
-        self.refresh_preview()
 
         if problems:
             shown = "\n".join(problems[:3])
@@ -144,13 +144,16 @@ class MainFrame(ttk.Frame):
         else:
             ms.showinfo(M[9], M[10].format(copied))
 
+        self.problems = problems
+        self.refresh_preview()
+
     def refresh_preview(self) -> None:
         if self.state is None:
-            self.operation_list.set_operations([])
+            self.operation_list.set_operations([], self.problems)
             return
 
         self.state.filetype = self.info_section.filetype_var.get()
 
         operations = self.state.get_operations()
 
-        self.operation_list.set_operations(operations, prefix=str(self.state.common_folder))
+        self.operation_list.set_operations(operations, self.problems, prefix=str(self.state.common_folder))

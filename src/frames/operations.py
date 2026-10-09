@@ -25,6 +25,8 @@ class OperationFrame(ttk.Frame):
         self.tree.column("source", width=400, minwidth=150, stretch=True)
         self.tree.column("destination", width=400, minwidth=150, stretch=True)
         self.tree.tag_configure("missing", foreground="#b00020", background="#ffd5dd")
+        self.tree.tag_configure("warning", foreground="#a4b000", background="#fffcd5")
+        self.tree.tag_configure("complete", foreground="#00b020", background="#deffd5")
 
         vsb = ttk.Scrollbar(self, orient="vertical", command=self.tree.yview)
         self.tree.configure(yscrollcommand=vsb.set)
@@ -35,18 +37,20 @@ class OperationFrame(ttk.Frame):
         self.columnconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
 
-    def set_operations(self, operations, prefix: str = "") -> None:
+    def set_operations(self, operations, problems: list[str], prefix: str = "") -> None:
         for item in self.tree.get_children():
             self.tree.delete(item)
 
+        are_problems: bool = len(problems) > 0
         showed_missing: bool = False
 
         for index, (source, destination) in enumerate(operations, start=1):
-            missing = not source.exists()
+            if not are_problems:
+                missing = not source.exists()
 
-            if missing and not showed_missing:
-                ms.showwarning(O[3], O[4])
-                showed_missing = True
+                if missing and not showed_missing:
+                    ms.showwarning(O[3], O[4])
+                    showed_missing = True
 
             src_text = str(source)
             dst_text = str(destination)
@@ -55,12 +59,22 @@ class OperationFrame(ttk.Frame):
                 src_text = src_text[len(prefix):]
                 dst_text = dst_text[len(prefix):]
 
+            tags = ()
+
+            if are_problems:
+                # Very quirky and not elegant
+                for p in problems:
+                    if source.name in p:
+                        tags = ("warning",)
+            elif missing:
+                tags = ("missing",)
+
             self.tree.insert(
                 "",
                 "end",
                 iid=str(index),
                 values=(src_text, dst_text),
-                tags=() if True or not missing else ("missing",),
+                tags=tags,
             )
 
         self.count_var.set(O[0].format(len(operations)))
