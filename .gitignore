@@ -1,0 +1,11 @@
+# VSCode
+.vscode
+
+# Environment
+venv
+
+# Cache
+**/__pycache__
+
+# Build
+build
