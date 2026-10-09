@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 
 F: list[str] = [
-    "TABELLEDATEI:",
+    "TABELLENDATEI:",
     "Wählen...",
     "Neu laden",
     "-=-",
