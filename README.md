@@ -1,4 +1,4 @@
-# Excel BC `(v1.0.0)`
+# Excel BC `(v1.0.1)`
 
 ## Usage
 
@@ -29,7 +29,7 @@ The headers are case-insensitive and spaces or underscores are allowed, formatti
 > **Note:** The number of rows for `file name auto`, `file name manual`, and `destination` must match exactly.
 
 ![](docs/pic3.png)
-> **Pic. 2**: Example of a result of the controlling workbook from *Pic. 1*
+> **Pic. 3**: Example of a result of the controlling workbook from *Pic. 1*
 
 2. **Launch the Application**
 
