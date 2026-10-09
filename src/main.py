@@ -23,7 +23,7 @@ class App(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
 
-        self.title("Excel BC v1.0.0")
+        self.title("Excel BC v1.0.1")
         self.geometry("1000x740+100+100")
         self.resizable(True, True)
         self.iconbitmap("icon.ico")
