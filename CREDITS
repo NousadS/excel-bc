@@ -1,0 +1,11 @@
+This application contains third-party software components redistributed under their respective licenses:
+
+1. Python
+Licensed under the Python Software Foundation (PSF) License. 
+Copyright (c) 2001-2026 Python Software Foundation. All rights reserved.
+Full license terms can be found at: https://docs.python.org/3/license.html
+
+2. openpyxl
+Licensed under the MIT License.
+Copyright (c) 2010 openpyxl
+Full license terms can be found at: https://foss.heptapod.net/openpyxl/openpyxl/-/blob/52c77fdee169dceefc11aceef956aa0367e9759a/LICENCE.rst
