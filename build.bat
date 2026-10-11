@@ -6,8 +6,10 @@ pyinstaller ./src/main.py ^
     --workpath="./build/cache" ^
     --specpath="./build/" ^
     --onefile ^
-    --name="ExcelBC-vX.X.X-win-x64.exe" ^
+    --name="ExBC-vX.X.X-win-x64.exe" ^
     --optimize=2 ^
     --noconsole ^
-    --icon="../src/icon.ico" ^
-    --add-data="../src/icon.ico;."
+    --icon="../icon.ico" ^
+    --add-data="../icon.ico;." ^
+    --add-data="../CREDITS;." ^
+    --add-data="../LICENSE;."
